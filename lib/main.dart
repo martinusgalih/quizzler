@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+import 'quiz_brain.dart';
+
+QuizBrain quizBrain = QuizBrain();
 
 void main() => runApp(Quizzler());
 class Quizzler extends StatelessWidget {
@@ -30,15 +33,6 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List <Widget> scoreKeeper = [];
-
-  List <Question> questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(q: 'Approximately one quarter of human bones are in the feet.', a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-  ];
-
-  int questionNumber = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -52,7 +46,7 @@ class _QuizPageState extends State<QuizPage> {
           flex: 5,
           child: Center(
             child: Text(
-              questionBank[questionNumber].questionText,
+              quizBrain.getQuestionText(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
@@ -113,10 +107,19 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void answerQuestion(bool answer) {
-    if (scoreKeeper.length == questionBank.length) {
+    if (scoreKeeper.length == quizBrain.questionBankLength) {
+      int count = 0;
+      for (var widget in scoreKeeper) {
+        if (widget is Icon && widget.icon == Icons.check) {
+          count++;
+        };
+      };
+      Alert(context: context,
+          title: 'Congrats',
+          desc: 'You\'ve reached the end of the quiz. Your score is $count').show();
       return;
     }
-    if (answer == questionBank[questionNumber].questionAnswer) {
+    if (answer == quizBrain.getQuestionAnswer()) {
       scoreKeeper.add(
         Icon(Icons.check, color: Colors.green),
       );
@@ -125,9 +128,6 @@ class _QuizPageState extends State<QuizPage> {
         Icon(Icons.close, color: Colors.red),
       );
     }
-    if (questionNumber >= questionBank.length - 1) {
-      return;
-    }
-    questionNumber++;
+    quizBrain.nextQuestion();
   }
 }
