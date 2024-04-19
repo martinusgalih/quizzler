@@ -4,16 +4,16 @@ class QuizBrain {
   int questionNumber = 0;
 
   List<Question> _questionBank = [
-    Question(q: 'You can lead a cow down stairs but not up stairs.', a: false),
-    Question(q: 'Approximately one quarter of human bones are in the feet.', a: true),
-    Question(q: 'A slug\'s blood is green.', a: true),
-    Question(q: 'The Earth is flat.', a: false),
-    Question(q: 'Water boils at 100 degrees Celsius.', a: true),
-    Question(q: 'Humans can breathe underwater.', a: false),
-    Question(q: 'The capital of France is Rome.', a: false),
-    Question(q: 'The Great Wall of China is visible from space.', a: false),
-    Question(q: 'The human body has 206 bones.', a: true),
-    Question(q: 'Mount Everest is the tallest mountain in the world.', a: true),
+    Question('You can lead a cow down stairs but not up stairs.', false),
+    Question('Approximately one quarter of human bones are in the feet.', true),
+    Question('A slug\'s blood is green.', true),
+    Question('The Earth is flat.', false),
+    Question('Water boils at 100 degrees Celsius.', true),
+    Question('Humans can breathe underwater.', false),
+    Question('The capital of France is Rome.', false),
+    Question('The Great Wall of China is visible from space.', false),
+    Question('The human body has 206 bones.', true),
+    Question('Mount Everest is the tallest mountain in the world.', true),
   ];
 
   bool getQuestionAnswer() {
