@@ -114,6 +114,7 @@ class _QuizPageState extends State<QuizPage> {
           count++;
         };
       };
+      count = count * 10;
       Alert(context: context,
           title: 'Congrats',
           desc: 'You\'ve reached the end of the quiz. Your score is $count').show();
